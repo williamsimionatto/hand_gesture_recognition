@@ -6,6 +6,11 @@ Hand Gesture Recognition is a project aimed at developing a system capable of ac
 
 
 ## Installation
+Recommended Python version: 3.9.6
+
+```bash
+pip3 install -r requirements.txt
+```
 
 ## Usage
 
