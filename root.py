@@ -2,8 +2,8 @@ import cv2
 import mediapipe as mp
 
 mp_drawing = mp.solutions.drawing_utils
-
 mp_hands = mp.solutions.hands
+
 cap = cv2.VideoCapture(0)
 
 with mp_hands.Hands(
@@ -32,6 +32,17 @@ with mp_hands.Hands(
           mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=4),
           mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2)
         )
+
+        thumb_tip = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP]
+        index_tip = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP]
+        middle_tip = hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP]
+        ring_tip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
+        pinky_tip = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP]
+
+        if thumb_tip.y < index_tip.y < middle_tip.y < ring_tip.y < pinky_tip.y:
+          cap.release()
+          cv2.destroyAllWindows()
+          break
 
     cv2.imshow('Hand Tracking', image)
     if cv2.waitKey(10) & 0xFF == ord('q'):
