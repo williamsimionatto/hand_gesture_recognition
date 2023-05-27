@@ -6,6 +6,7 @@ mp_hands = mp.solutions.hands
 
 cap = cv2.VideoCapture(0)
 path = []
+mode = 0
 
 with mp_hands.Hands(
     static_image_mode=True,
@@ -50,13 +51,14 @@ with mp_hands.Hands(
         elif index_tip.y < middle_tip.y and index_tip.y < ring_tip.y and index_tip.y < pinky_tip.y: # Verificar se o dedo indicador está erguido
           cv2.putText(image, "Dedo indicador erguido! Para limpar abra a mao", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
 
-          # Salva as coordenadas do dedo indicador
-          index_tip_x = int(index_tip.x * image.shape[1])
-          index_tip_y = int(index_tip.y * image.shape[0])
-          path.append((index_tip_x, index_tip_y))
+          if mode == 1:
+            # Salva as coordenadas do dedo indicador
+            index_tip_x = int(index_tip.x * image.shape[1])
+            index_tip_y = int(index_tip.y * image.shape[0])
+            path.append((index_tip_x, index_tip_y))
 
-          for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
-            cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
+            for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
+              cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
         else:
           path = []
           cv2.putText(image, "Mao aberta!", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
@@ -65,6 +67,10 @@ with mp_hands.Hands(
     cv2.imshow('Hand Tracking', image)
     if cv2.waitKey(10) & 0xFF == ord('q'):
       break
+    elif cv2.waitKey(10) & 0xFF == ord('d'):
+      mode = 1
+    elif cv2.waitKey(10) & 0xFF == ord('e'):
+      mode = 0
 
 cap.release()
 cv2.destroyAllWindows()
