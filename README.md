@@ -3,7 +3,20 @@
 Hand Gesture Recognition is a project aimed at developing a system capable of accurately detecting and recognizing hand gestures in real-time. Hand gestures serve as a powerful form of non-verbal communication and can be utilized to control a wide range of applications and devices. This project leverages computer vision techniques and machine learning algorithms to analyze video input from a webcam and identify specific hand gestures.
 
 ## Features
-### V1.0.0
+### <span style="color:orange">  V1.2.0 (Coming soon 2023-06-16) </span>
+* Add hand gesture recognition to control the slider widget (Clamping)
+* Add hand gesture recognition to control the zoom of the image widget (Zoom in, Zoom Out)
+
+### <span style="color:orange"> V1.1.0 (Coming soon 2023-06-02) <span>
+* Configure Tkinter
+* Create a Widget to show a image
+* Create a Widget to show a slider
+* Add new mode to enable Tkinter, key `t` and mode `2`
+
+### <span style="color:green"> V1.0.1 </span>
+*  Detect if all hands are closed to exit application
+
+### <span style="color:green"> V1.0.0 </span>
 * Real-time hand tracking.
 * Detection and display of finger landmark points.
 * Drawing lines representing the movement of the index finger when it is raised.
@@ -35,6 +48,11 @@ pip3 install -r requirements.txt
 3. To exit the program, close either hand.
 
 ## Demonstration
+
+
+## Limitations
+The current implementation of the hand gesture recognition system has the following limitations:
+* The Python version is limited to `3.9.6`, as the MediaPipe library is not compatible with Python `3.10+`.
 
 
 ## Contributors
