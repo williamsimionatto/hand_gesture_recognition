@@ -63,13 +63,21 @@ with mp_hands.Hands(
           path = []
           cv2.putText(image, "Mao aberta!", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
+    if mode == 1:
+      cv2.putText(image, "Drawing mode enabled", (image.shape[1] - 260, image.shape[0] - 700), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+
+    cv2.putText(image, "Press D to enable a drawing", (image.shape[1] - 360, image.shape[0] - 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
+    cv2.putText(image, "Press E to disable a drawing", (image.shape[1] - 360, image.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
 
     cv2.imshow('Hand Tracking', image)
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('q'):
       break
-    elif cv2.waitKey(10) & 0xFF == ord('d'):
+    elif key == ord('d'):
       mode = 1
-    elif cv2.waitKey(10) & 0xFF == ord('e'):
+    elif key == ord('e'):
+      path = []
       mode = 0
 
 cap.release()
