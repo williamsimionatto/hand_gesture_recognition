@@ -25,7 +25,9 @@ with mp_hands.Hands(
     results = hands.process(image)
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
 
-    cv2.putText(image, "Feche as duas mãos para encerrar!", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+    if mode == 0:
+      cv2.putText(image, "Feche as duas maos para encerrar!", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+
     closed_hands = 0  # Contador de mãos fechadas
 
     if results.multi_hand_landmarks:
@@ -58,6 +60,8 @@ with mp_hands.Hands(
 
             for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
               cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
+        elif mode == 2:
+          cv2.putText(image, "Tkinter Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
         else:
           path = []
           closed_hands = 0
@@ -85,6 +89,8 @@ with mp_hands.Hands(
     elif key == ord('e'):
       path = []
       mode = 0
+    elif key == ord('t'):
+      mode = 2
 
 cap.release()
 cv2.destroyAllWindows()
