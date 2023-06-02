@@ -62,6 +62,12 @@ with mp_hands.Hands(
               cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
         elif mode == 2:
           cv2.putText(image, "Tkinter Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
+          thumbTip = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
+          indexTip = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
+
+          cv2.circle(image, thumbTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
+          cv2.circle(image, indexTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
+          cv2.line(image, thumbTip, indexTip, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
         else:
           path = []
           closed_hands = 0
