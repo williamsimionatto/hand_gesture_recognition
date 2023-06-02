@@ -47,20 +47,19 @@ with mp_hands.Hands(
         ring_tip = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP]
         pinky_tip = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP]
 
-        if thumb_tip.y < index_tip.y < middle_tip.y < ring_tip.y < pinky_tip.y and mode == 0: # Verificar se a mão está fechada e não está no modo desenho
+        if mode == 0 and thumb_tip.y < index_tip.y < middle_tip.y < ring_tip.y < pinky_tip.y: # Verificar se a mão está fechada e não está no modo desenho
           closed_hands += 1
-        elif index_tip.y < middle_tip.y and index_tip.y < ring_tip.y and index_tip.y < pinky_tip.y: # Verificar se o dedo indicador está erguido
+        elif mode == 1 and index_tip.y < middle_tip.y and index_tip.y < ring_tip.y and index_tip.y < pinky_tip.y: # Verificar se o dedo indicador está erguido
           cv2.putText(image, "Dedo indicador erguido! Para limpar abra a mao", (10, 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
 
-          if mode == 1:
-            # Salva as coordenadas do dedo indicador
-            index_tip_x = int(index_tip.x * image.shape[1])
-            index_tip_y = int(index_tip.y * image.shape[0])
-            path.append((index_tip_x, index_tip_y))
-            closed_hands = 0
+          # Salva as coordenadas do dedo indicador
+          index_tip_x = int(index_tip.x * image.shape[1])
+          index_tip_y = int(index_tip.y * image.shape[0])
+          path.append((index_tip_x, index_tip_y))
+          closed_hands = 0
 
-            for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
-              cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
+          for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
+            cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
         elif mode == 2:
           cv2.putText(image, "Tkinter Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
           thumbTip = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
