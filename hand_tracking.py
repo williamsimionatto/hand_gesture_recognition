@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+import math
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
@@ -68,6 +69,14 @@ with mp_hands.Hands(
           cv2.circle(image, thumbTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
           cv2.circle(image, indexTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
           cv2.line(image, thumbTip, indexTip, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
+
+          # Calcular a distância entre os dedos polegar e indicador
+          distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
+          distance_normalized = min(distance / 0.5, 1.0)  # Normalizar a distância entre 0 e 1
+
+          # Gerar valor para controlar o slider Valor entre 0 e 100
+          slider_value = int(distance_normalized * 100)
+          cv2.putText(image, f"Slider: {slider_value}", (10, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
         else:
           path = []
           closed_hands = 0
