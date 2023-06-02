@@ -62,12 +62,12 @@ with mp_hands.Hands(
             cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
         elif mode == 2:
           cv2.putText(image, "Tkinter Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-          thumbTip = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
-          indexTip = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
+          thumbFinger = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
+          indexFinger = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
 
-          cv2.circle(image, thumbTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
-          cv2.circle(image, indexTip, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
-          cv2.line(image, thumbTip, indexTip, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
+          cv2.circle(image, thumbFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
+          cv2.circle(image, indexFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
+          cv2.line(image, thumbFinger, indexFinger, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
 
           # Calcular a distância entre os dedos polegar e indicador
           distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
