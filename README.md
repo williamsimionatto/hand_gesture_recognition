@@ -3,17 +3,24 @@
 Hand Gesture Recognition is a project aimed at developing a system capable of accurately detecting and recognizing hand gestures in real-time. Hand gestures serve as a powerful form of non-verbal communication and can be utilized to control a wide range of applications and devices. This project leverages computer vision techniques and machine learning algorithms to analyze video input from a webcam and identify specific hand gestures.
 
 ## Features
-### <span style="color:orange">  V1.2.1 (Coming soon 2023-06-16) </span>
+###  V1.3.2 (Coming soon 2023-06-09)
 * Add hand gesture recognition to control the zoom of the image widget (Zoom in, Zoom Out)
+
+* Integrate the image widget with the hand gesture recognition system
+
+###  V1.3.1 (Coming soon 2023-06-09)
+* Create a Widget to show a image
+
+### <span style="color:green !important">  V1.2.1 </span>
+* Integrate the slider widget with the hand gesture recognition system
 
 ### <span style="color:green">  V1.2.0 </span>
 * Add hand gesture recognition to control the slider widget (Clamping)
-
-### <span style="color:orange"> V1.1.0 (Coming soon 2023-06-02) <span>
-* Configure Tkinter
-* Create a Widget to show a image
-* Create a Widget to show a slider
 * Add new mode to enable Tkinter, key `t` and mode `2`
+
+### <span style="color:green"> V1.1.0 <span>
+* Configure Tkinter
+* Create a Widget to show a slider
 
 ### <span style="color:green"> V1.0.1 </span>
 *  Detect if all hands are closed to exit application
