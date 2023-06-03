@@ -129,6 +129,7 @@ def show_tkinter_window(root):
 
 def update_slider_value(root, slider, value):
   slider.set(value)
+  label.config(text=f"Slider value: {value}")  # Atualiza o texto da label com o valor atual do slider
   root.update()
 
 
@@ -137,9 +138,12 @@ thread_video.start()
 
 root = tk.Tk()
 root.title("Tkinter Window")
-root.geometry("500x500")
+root.geometry("300x200")
 
 slider = ttk.Scale(root, from_=0, to=100, orient=tk.HORIZONTAL)
 slider.pack()
+
+label = tk.Label(root, text="Slider value: 0")  # Cria a label com o valor inicial do slider
+label.pack()
 
 show_tkinter_window(root)
