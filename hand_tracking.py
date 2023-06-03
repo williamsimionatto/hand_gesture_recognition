@@ -1,6 +1,9 @@
 import cv2
 import mediapipe as mp
 import math
+import threading
+import tkinter as tk
+from tkinter import ttk
 
 def show_webcam():
   mp_drawing = mp.solutions.drawing_utils
@@ -128,13 +131,9 @@ def update_slider_value(root, slider, value):
   slider.set(value)
   root.update()
 
-import threading
 
 thread_video = threading.Thread(target=show_webcam)
 thread_video.start()
-
-import tkinter as tk
-from tkinter import ttk
 
 root = tk.Tk()
 root.title("Tkinter Window")
