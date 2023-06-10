@@ -70,39 +70,27 @@ def show_webcam():
             for i in range(1, len(path)): # Desenhar o caminho do dedo indicador conforme as coordenadas salvas
               cv2.line(image, path[i-1], path[i], (255, 255, 0), 2)
           elif mode == 2:
+            thumbFinger = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
+            indexFinger = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
+
+            cv2.circle(image, thumbFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
+            cv2.circle(image, indexFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
+            cv2.line(image, thumbFinger, indexFinger, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
+
+            # Calcular a distância entre os dedos polegar e indicador
+            distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
+            distance_normalized = min(distance / 0.5, 1.0)  # Normalizar a distância entre 0 e 1
+
+            # Gerar valor para controlar o slider Valor entre 0 e 100
+            distance_value = int(distance_normalized * 100)
+            
             if tkinter_mode == 0:
               cv2.putText(image, "Tkinter Slider Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-              thumbFinger = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
-              indexFinger = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
-
-              cv2.circle(image, thumbFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
-              cv2.circle(image, indexFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
-              cv2.line(image, thumbFinger, indexFinger, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
-
-              # Calcular a distância entre os dedos polegar e indicador
-              distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
-              distance_normalized = min(distance / 0.5, 1.0)  # Normalizar a distância entre 0 e 1
-
-              # Gerar valor para controlar o slider Valor entre 0 e 100
-              slider_value = int(distance_normalized * 100)
-              cv2.putText(image, f"Slider: {slider_value}", (10, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
-
-              update_slider_value(root, slider, slider_value)
+              update_slider_value(root, slider, distance_value)
+              cv2.putText(image, f"Slider: {distance_value}", (10, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 0, 0), 2)
             elif tkinter_mode == 1:
               cv2.putText(image, "Tkinter Zoom Mode", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
-              thumbFinger = (int(thumb_tip.x * image.shape[1]), int(thumb_tip.y * image.shape[0]))
-              indexFinger = (int(index_tip.x * image.shape[1]), int(index_tip.y * image.shape[0]))
-
-              cv2.circle(image, thumbFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo polegar
-              cv2.circle(image, indexFinger, 10, (255, 0, 0), -1)  # Adicionar círculo no dedo indicador
-              cv2.line(image, thumbFinger, indexFinger, (255, 0, 0), 2) # Adicionar uma linha ligando o dedo polegar e o dedo indicador
-
-              # Calcular a distância entre os dedos polegar e indicador
-              distance = math.sqrt((thumb_tip.x - index_tip.x)**2 + (thumb_tip.y - index_tip.y)**2)
-              distance_normalized = min(distance / 0.5, 1.0)  # Normalizar a distância entre 0 e 1
-              
-              zoom_value = int(distance_normalized * 100)
-              update_image_and_zoom(image_label, zoom_value)
+              update_image_and_zoom(image_label, distance_value)
           else:
             path = []
             closed_hands = 0
@@ -141,6 +129,7 @@ def show_webcam():
 
   cap.release()
   cv2.destroyAllWindows()
+  root.destroy()
 
 
 def show_tkinter_window(root):
