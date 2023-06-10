@@ -7,11 +7,11 @@ Hand Gesture Recognition is a project aimed at developing a system capable of ac
 * Integrate the image widget with the hand gesture recognition system
 
 ###  V1.3.1 (Coming soon 2023-06-09) ⏰
-* Create a Widget to show a image
-
-###  V1.3.0 (Coming soon 2023-06-09) ⏰
 * Add hand gesture recognition to control the zoom of the image widget (Zoom in, Zoom Out)
+
+###  V1.3.0 (Available 2023-06-09) ✅
 * Add new Tkinter mode, key `z` and tkinter_mode `1`
+* Create a Widget to show a image
 
 ###  V1.2.1  (Available 2023-06-02) ✅
 * Integrate the slider widget with the hand gesture recognition system
