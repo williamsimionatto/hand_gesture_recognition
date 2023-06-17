@@ -51,6 +51,8 @@ pip3 install -r requirements.txt
 1. Run the Python script hand_tracking.py in your development environment or execute the following command in the terminal:
   ```bash
   python3 hand_tracking.py
+  python3 hand_tracking_tk.py
+  python3 hand_tracking_game.py
   ```
 2. A window will open showing the live camera feed with the overlay of hand landmark points and lines tracking the movement of the index finger when it is raised.
 
