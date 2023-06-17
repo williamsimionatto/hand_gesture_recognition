@@ -11,9 +11,9 @@ def check_winner(player_gesture, computer_gesture):
     return "Tie"
 
   if (
-    (player_gesture == "rock" and computer_gesture == "scissors") or 
-    (player_gesture == "paper" and computer_gesture == "rock") or 
-    (player_gesture == "scissors" and computer_gesture == "paper")
+    (player_gesture == "Rock" and computer_gesture == "Scissors") or 
+    (player_gesture == "Paper" and computer_gesture == "Rock") or 
+    (player_gesture == "Scissors" and computer_gesture == "Paper")
   ):
     return "Winner"
 
@@ -29,7 +29,7 @@ computer_score = 0
 game_started = False
 player_gesture_last = None
 player_gesture = None
-gestures = ["rock", "paper", "scissors"]
+gestures = ["Rock", "Paper", "Scissors"]
 computer_gesture = ""
 result = "Tie"
 
@@ -83,7 +83,6 @@ with mp_hands.Hands(
           if (player_gesture_last != player_gesture):
             computer_gesture = random.choice(gestures)
             result = check_winner(player_gesture, computer_gesture)
-
             if result == "Winner":
               player_score += 1
             elif result == "Loser":
