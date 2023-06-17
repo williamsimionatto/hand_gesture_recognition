@@ -2,8 +2,8 @@ import cv2
 import mediapipe as mp
 import random
 
-def show_text(frame, text, position, font_size=1):
-  cv2.putText(frame, text, position, cv2.FONT_HERSHEY_SIMPLEX, font_size, (255, 0, 0), 2, cv2.LINE_AA)
+def show_text(frame, text, position, font_size=1, color=(255, 0, 0)):
+  cv2.putText(frame, text, position, cv2.FONT_HERSHEY_SIMPLEX, font_size, color, 2, cv2.LINE_AA)
 
 
 def check_winner(player_gesture, computer_gesture):
@@ -81,16 +81,19 @@ with mp_hands.Hands(
 
         if (player_gesture and game_started):
           if (player_gesture_last != player_gesture):
+            result_color = (0, 255, 255)
             computer_gesture = random.choice(gestures)
             result = check_winner(player_gesture, computer_gesture)
             if result == "Winner":
               player_score += 1
+              result_color = (0, 255, 0)
             elif result == "Loser":
               computer_score += 1
+              result_color = (0, 0, 255)
 
           show_text(frame, "Computer: {}".format(computer_gesture), (frame.shape[1] - 250, 80), font_size=0.7)
           show_text(frame, "Player: {}".format(player_gesture), (frame.shape[1] - 250, 40), font_size=0.7)
-          show_text(frame, result, (int(frame.shape[1] / 2) - 50, int(frame.shape[0] / 2)))
+          show_text(frame, result, (int(frame.shape[1] / 2) - 50, int(frame.shape[0] / 2)), 1, result_color)
 
     if game_started:
       show_text(frame, "Player = {}".format(player_score), (20, 40))
@@ -108,14 +111,16 @@ with mp_hands.Hands(
       computer_score = 0
     
     if key == ord("q"):
-      result_final = "Tie"
+      final_result = "Tie"
+      final_result_color = (0, 255, 255)
       if player_score > computer_score:
-        result_final = "Victory"
+        final_result = "Victory"
+        final_result_color = (0, 255, 0)
       elif player_score < computer_score:
-        result_final = "Defeat"
+        final_result = "Defeat"
+        final_result_color = (0, 0, 255)
 
-      print(result_final)
-      show_text(frame, result_final, (int(frame.shape[1] / 2) - 50, int(frame.shape[0] / 2)))
+      show_text(frame, final_result, (int(frame.shape[1] / 2) - 50, int(frame.shape[0] / 2)), 1, final_result_color)
       cv2.imshow("Rock Paper Scissor Game", frame)
       cv2.waitKey(2000)
       break
