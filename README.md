@@ -60,7 +60,8 @@ pip3 install -r requirements.txt
 
 ## Demonstration
 
-https://drive.google.com/file/d/1ZMPuHZ25x8bn6H5G6b4Tvw4An6gMjx8D/view?usp=drive_link
+https://drive.google.com/file/d/1GdiIMFSnSwg4b0-_ezIB-5S1d88U3Tza/view?usp=drive_link (simple)
+https://drive.google.com/file/d/1ZMPuHZ25x8bn6H5G6b4Tvw4An6gMjx8D/view?usp=drive_link (complete)
 
 ## Limitations
 The current implementation of the hand gesture recognition system has the following limitations:
